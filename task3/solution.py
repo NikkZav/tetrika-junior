@@ -10,12 +10,10 @@ def appearance(intervals: dict[str, list[int]]) -> int:
     lesson_start, lesson_end = intervals['lesson']
 
     events = []
-    for i in range(0, len(intervals['pupil']), 2):
-        events.append((intervals['pupil'][i], Action.ENTER, 'pupil'))
-        events.append((intervals['pupil'][i+1], Action.EXIT, 'pupil'))
-    for i in range(0, len(intervals['tutor']), 2):
-        events.append((intervals['tutor'][i], Action.ENTER, 'tutor'))
-        events.append((intervals['tutor'][i+1], Action.EXIT, 'tutor'))
+    for role in ['pupil', 'tutor']:
+        for i in range(0, len(intervals[role]), 2):
+            events.append((intervals[role][i], Action.ENTER, role))
+            events.append((intervals[role][i+1], Action.EXIT, role))
 
     events.sort()
 
